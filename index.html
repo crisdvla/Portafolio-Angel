@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Escolar - Macias Giron Angel Leonel</title>
+    <style>
+        /* Variables de diseño para facilitar cambios de color */
+        :root {
+            --primario: #0d9488;       /* Teal/Esmeralda principal */
+            --primario-oscuro: #0f766e;/* Teal para hover y textos oscuros */
+            --primario-claro: #f0fdfa; /* Fondo ultra claro para detalles */
+            --gris-fondo: #f8fafc;     /* Fondo general de la página */
+            --gris-borde: #e2e8f0;     /* Bordes finos */
+            --texto-principal: #1e293b;/* Gris pizarra oscuro */
+            --texto-secundario: #475569;/* Gris para textos secundarios */
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--gris-fondo);
+            color: var(--texto-principal);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+        }
+
+        /* Contenedor central */
+        .contenedor {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Cabecera estilo Banner Moderno */
+        .cabecera-portafolio {
+            background: linear-gradient(135deg, var(--primario-oscuro), var(--primario));
+            color: #ffffff;
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .cabecera-portafolio h1 {
+            margin: 0 0 15px 0;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* Rejilla de información académica */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .info-item {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+        }
+
+        .info-item strong {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 2px;
+        }
+
+        /* Navegación por pestañas */
+        .pestañas-navegacion {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            padding: 8px;
+            border-radius: 30px;
+            border: 1px solid var(--gris-borde);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .btn-pestaña {
+            background: none;
+            color: var(--texto-secundario);
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-pestaña:hover {
+            background-color: #f1f5f9;
+            color: var(--texto-principal);
+        }
+
+        /* Pestaña activa */
+        .btn-pestaña.activa {
+            background-color: var(--primario);
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(13, 148, 136, 0.2);
+        }
+
+        /* Tarjeta de Contenido */
+        .tarjeta-contenido {
+            background-color: #ffffff;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--gris-borde);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: none; /* Oculto por defecto */
+        }
+
+        .tarjeta-contenido.activa {
+            display: block;
+            animation: suavizarEntrada 0.25s ease-out;
+        }
+
+        @keyframes suavizarEntrada {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tarjeta-contenido h2 {
+            color: var(--primario-oscuro);
+            margin-top: 0;
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        /* Contenedor del PDF */
+        .visor-pdf-container {
+            border: 1px solid var(--gris-borde);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: var(--gris-fondo);
+        }
+
+        .visor-pdf {
+            width: 100%;
+            height: 550px;
+            border: none;
+            display: block;
+        }
+
+        /* Barra de herramientas inferior */
+        .barra-descarga {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8fafc;
+            padding: 12px 18px;
+            border-top: 1px solid var(--gris-borde);
+            font-size: 13px;
+            color: var(--texto-secundario);
+        }
+
+        .btn-abrir-archivo {
+            background-color: var(--primario);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.15s ease;
+        }
+
+        .btn-abrir-archivo:hover {
+            background-color: var(--primario-oscuro);
+        }
+
+        /* Adaptación en celulares */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .cabecera-portafolio {
+                padding: 20px 15px;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .pestañas-navegacion {
+                border-radius: 12px;
+                padding: 6px;
+            }
+            .btn-pestaña {
+                width: 100%;
+                text-align: center;
+                border-radius: 8px;
+                padding: 8px 10px;
+            }
+            .barra-descarga {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+            .visor-pdf {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+
+        <!-- Cabecera de Datos del Alumno y Profesor -->
+        <header class="cabecera-portafolio">
+            <h1>Portafolio Digital de Evidencias</h1>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Estudiante</strong>
+                    <span>Macias Giron Angel Leonel</span>
+                </div>
+                <div class="info-item">
+                    <strong>Docente</strong>
+                    <span>Hernández López Noé</span>
+                </div>
+                <div class="info-item">
+                    <strong>Materia y Grupo</strong>
+                    <span>Cultura Digital II - 205</span>
+                </div>
+                <div class="info-item">
+                    <strong>Semestre</strong>
+                    <span>Segundo Semestre (2026)</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navegación de Pestañas Redondeadas -->
+        <nav class="pestañas-navegacion">
+            <button class="btn-pestaña activa" onclick="mostrarTab('p1', this)">Propósito 1</button>
+            <button class="btn-pestaña" onclick="mostrarTab('p2', this)">Propósito 2</button>
+            <button class="btn-pestaña" onclick="mostrarTab('p3', this)">Propósito 3</button>
+            <button class="btn-pestaña" onclick="mostrarTab('p4', this)">Propósito 4</button>
+            <button class="btn-pestaña" onclick="mostrarTab('cartel', this)">Cartel Filosófico</button>
+        </nav>
+
+        <!-- ================= CONTENIDO PROPÓSITO 1 ================= -->
+        <main id="p1" class="tarjeta-contenido activa">
+            <h2>Propósito Formativo 1</h2>
+            <div class="visor-pdf-container">
+                <iframe class="visor-pdf" src="archivos/Prop%C3%B3sito%20Educativo%201.pdf"></iframe>
+                <div class="barra-descarga">
+                    <span>Archivo: Propósito Educativo 1.pdf</span>
+                    <a class="btn-abrir-archivo" href="archivos/Prop%C3%B3sito%20Educativo%201.pdf" target="_blank">Abrir / Descargar</a>
+                </div>
+            </div>
+        </main>
+
+        <!-- ================= CONTENIDO PROPÓSITO 2 ================= -->
+        <section id="p2" class="tarjeta-contenido">
+            <h2>Propósito Formativo 2</h2>
+            <div class="visor-pdf-container">
+                <iframe class="visor-pdf" src="archivos/Presentaci%C3%B3n%20Proyecto%20Creativo%20Collage%20Beige.pdf"></iframe>
+                <div class="barra-descarga">
+                    <span>Archivo: Presentación Proyecto Creativo Collage Beige.pdf</span>
+                    <a class="btn-abrir-archivo" href="archivos/Presentaci%C3%B3n%20Proyecto%20Creativo%20Collage%20Beige.pdf" target="_blank">Abrir / Descargar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTENIDO PROPÓSITO 3 ================= -->
+        <section id="p3" class="tarjeta-contenido">
+            <h2>Propósito Formativo 3</h2>
+            <div class="visor-pdf-container">
+                <iframe class="visor-pdf" src="archivos/Investigar%20en%20el%20mundo%20digital.pdf"></iframe>
+                <div class="barra-descarga">
+                    <span>Archivo: Investigar en el mundo digital.pdf</span>
+                    <a class="btn-abrir-archivo" href="archivos/Investigar%20en%20el%20mundo%20digital.pdf" target="_blank">Abrir / Descargar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTENIDO PROPÓSITO 4 ================= -->
+        <section id="p4" class="tarjeta-contenido">
+            <h2>Propósito Formativo 4</h2>
+            <div class="visor-pdf-container">
+                <iframe class="visor-pdf" src="archivos/An%C3%A1lisis%20estad%C3%ADstico%20de%20la%20desinformaci%C3%B3n%20de%20redes%20sociales.pdf"></iframe>
+                <div class="barra-descarga">
+                    <span>Archivo: Análisis estadístico de la desinformación de redes sociales.pdf</span>
+                    <a class="btn-abrir-archivo" href="archivos/An%C3%A1lisis%20estad%C3%ADstico%20de%20la%20desinformaci%C3%B3n%20de%20redes%20sociales.pdf" target="_blank">Abrir / Descargar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTENIDO CARTEL FILOSÓFICO ================= -->
+        <section id="cartel" class="tarjeta-contenido">
+            <h2>Cartel Filosófico</h2>
+            <div class="visor-pdf-container">
+                <iframe class="visor-pdf" src="archivos/Cartel.pdf"></iframe>
+                <div class="barra-descarga">
+                    <span>Archivo: Cartel.pdf</span>
+                    <a class="btn-abrir-archivo" href="archivos/Cartel.pdf" target="_blank">Abrir / Descargar</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script seguro de navegación de pestañas -->
+    <script>
+        function mostrarTab(idTab, botonSeleccionado) {
+            // Ocultar todas las tarjetas de contenido
+            var secciones = document.getElementsByClassName('tarjeta-contenido');
+            for (var i = 0; i < secciones.length; i++) {
+                secciones[i].classList.remove('activa');
+            }
+
+            // Desmarcar todos los botones de las pestañas
+            var botones = document.getElementsByClassName('btn-pestaña');
+            for (var j = 0; j < botones.length; j++) {
+                botones[j].classList.remove('activa');
+            }
+
+            // Mostrar el contenido seleccionado y marcar el botón actual
+            document.getElementById(idTab).classList.add('activa');
+            botonSeleccionado.classList.add('activa');
+        }
+    </script>
+
+</body>
+</html>
